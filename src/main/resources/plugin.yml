@@ -1,0 +1,11 @@
+name: AxStats
+description: $description
+prefix: AxStats
+version: '${version}'
+
+main: de.jaunikapauni.axstats.AxStats
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors: [ JauniKapauni ]
+website: https://github.com/JauniKapauni
