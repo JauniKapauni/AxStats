@@ -1,5 +1,6 @@
 package de.jaunikapauni.axstats;
 
+import de.jaunikapauni.axstats.listener.PlayerDeathListener;
 import de.jaunikapauni.axstats.listener.PlayerJoinListener;
 import de.jaunikapauni.axstats.manager.DatabaseManager;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public final class AxStats extends JavaPlugin {
             throw new RuntimeException(e);
         }
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
     }
 
     @Override

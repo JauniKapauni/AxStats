@@ -25,8 +25,9 @@ public class PlayerJoinListener implements Listener {
                 ps.setString(1, p.getUniqueId().toString());
                 ResultSet rs = ps.executeQuery();
                 if(!rs.next()){
-                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid) VALUES (?)")){
+                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid, deaths) VALUES (?, ?)")){
                         ps1.setString(1, p.getUniqueId().toString());
+                        ps1.setInt(2, 0);
                         ps1.executeUpdate();
                     }
                 }
