@@ -25,7 +25,7 @@ public class PlayerJoinListener implements Listener {
                 ps.setString(1, p.getUniqueId().toString());
                 ResultSet rs = ps.executeQuery();
                 if(!rs.next()){
-                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid, deaths, sessions, isOnline, first_join, last_online) VALUES (?, ?, ?, ?, NOW(), null)")){
+                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid, deaths, sessions, isOnline, first_join, last_online, player_kills, mob_kills) VALUES (?, ?, ?, ?, NOW(), null, 0, 0)")){
                         ps1.setString(1, p.getUniqueId().toString());
                         ps1.setInt(2, 0);
                         ps1.setInt(3, 1);
