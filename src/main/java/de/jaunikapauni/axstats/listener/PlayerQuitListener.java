@@ -22,6 +22,10 @@ public class PlayerQuitListener implements Listener {
                 ps.setString(1, e.getPlayer().getUniqueId().toString());
                 ps.executeUpdate();
             }
+            try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET last_online = NOW() WHERE uuid = ?")){
+                ps.setString(1, e.getPlayer().getUniqueId().toString());
+                ps.executeUpdate();
+            }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
