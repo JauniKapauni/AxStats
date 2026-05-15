@@ -25,7 +25,7 @@ public class PlayerJoinListener implements Listener {
                 ps.setString(1, p.getUniqueId().toString());
                 ResultSet rs = ps.executeQuery();
                 if(!rs.next()){
-                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid, deaths, sessions) VALUES (?, ?, ?)")){
+                    try(PreparedStatement ps1 = conn.prepareStatement("INSERT INTO players (uuid, deaths, sessions, isOnline) VALUES (?, ?, ?, ?)")){
                         ps1.setString(1, p.getUniqueId().toString());
                         ps1.setInt(2, 0);
                         ps1.setInt(3, 1);
@@ -33,6 +33,10 @@ public class PlayerJoinListener implements Listener {
                     }
                 } else {
                     try(PreparedStatement update = conn.prepareStatement("UPDATE players SET sessions = sessions + 1 WHERE uuid = ?")){
+                        update.setString(1, p.getUniqueId().toString());
+                        update.executeUpdate();
+                    }
+                    try(PreparedStatement update = conn.prepareStatement("UPDATE players SET isOnline = true WHERE uuid = ?")){
                         update.setString(1, p.getUniqueId().toString());
                         update.executeUpdate();
                     }
