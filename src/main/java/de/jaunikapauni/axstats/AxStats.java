@@ -44,5 +44,6 @@ public final class AxStats extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        databaseManager.close();
     }
 }
