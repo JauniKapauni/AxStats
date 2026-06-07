@@ -1,6 +1,10 @@
 # AxStats
 > Minecraft Plugin that collects data about every player
 ---
+## Requirements
+- Minecraft Paper 26.1.2 Server
+- MariaDB / MySQL Server
+---
 ## Features
 - Player Statistics
     - deaths
