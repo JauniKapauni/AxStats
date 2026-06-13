@@ -29,6 +29,7 @@ public class PlayerJoinListener implements Listener {
                         ps1.setString(1, p.getUniqueId().toString());
                         ps1.setInt(2, 0);
                         ps1.setInt(3, 1);
+                        ps1.setBoolean(4, true);
                         ps1.executeUpdate();
                     }
                 } else {
