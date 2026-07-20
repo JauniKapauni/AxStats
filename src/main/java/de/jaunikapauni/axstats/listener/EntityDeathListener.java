@@ -23,21 +23,10 @@ public class EntityDeathListener implements Listener {
         if(killer == null){
             return;
         }
-        UUID killerUUID = killer.getUniqueId();
-        try(Connection conn = reference.getDatabaseManager().getConnection()){
-            if(e.getEntity() instanceof Player){
-                try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET player_kills = player_kills + 1 WHERE uuid = ?")){
-                    ps.setString(1, killerUUID.toString());
-                    ps.executeUpdate();
-                }
-            } else {
-                try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET mob_kills = mob_kills + 1 WHERE uuid = ?")){
-                    ps.setString(1, killerUUID.toString());
-                    ps.executeUpdate();
-                }
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+        if(e.getEntity() instanceof Player){
+            reference.getStatsManager().addPlayerKill(killer.getUniqueId());
+            return;
         }
+        reference.getStatsManager().addMobKill(killer.getUniqueId());
     }
 }

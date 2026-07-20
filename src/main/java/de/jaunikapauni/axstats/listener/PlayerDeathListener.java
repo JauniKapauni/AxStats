@@ -19,13 +19,6 @@ public class PlayerDeathListener implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e){
         Player p = e.getPlayer();
-        try(Connection conn = reference.getDatabaseManager().getConnection()){
-            try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET deaths = deaths + 1 WHERE uuid = ?")){
-                ps.setString(1, p.getUniqueId().toString());
-                ps.executeUpdate();
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
+        reference.getStatsManager().addDeath(p.getUniqueId());
     }
 }

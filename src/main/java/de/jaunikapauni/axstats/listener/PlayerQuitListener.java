@@ -17,17 +17,6 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
-        try(Connection conn = reference.getDatabaseManager().getConnection()){
-            try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET isOnline = false WHERE uuid = ?")){
-                ps.setString(1, e.getPlayer().getUniqueId().toString());
-                ps.executeUpdate();
-            }
-            try(PreparedStatement ps = conn.prepareStatement("UPDATE players SET last_online = NOW() WHERE uuid = ?")){
-                ps.setString(1, e.getPlayer().getUniqueId().toString());
-                ps.executeUpdate();
-            }
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
+        reference.getStatsManager().onPlayerQuit(e.getPlayer().getUniqueId());
     }
 }
